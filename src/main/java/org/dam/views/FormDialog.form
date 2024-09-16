@@ -249,7 +249,9 @@
           </grid>
           <forms top="0" left="10" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="58b66" class="javax.swing.JTextField" binding="tx_feeding">
         <constraints>
@@ -258,14 +260,9 @@
           </grid>
           <forms top="0" left="10" bottom="0" right="0" defaultalign-horz="false"/>
         </constraints>
-        <properties/>
-      </component>
-      <component id="1f4c1" class="javax.swing.JSpinner" binding="sp_date">
-        <constraints>
-          <grid row="8" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <forms top="0" left="10" bottom="0" right="0" defaultalign-horz="false"/>
-        </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="727b7" class="javax.swing.JCheckBox" binding="ck_flyer">
         <constraints>
@@ -287,6 +284,15 @@
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="0" right="0" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <model/>
+        </properties>
+      </component>
+      <component id="24662" class="com.github.lgooddatepicker.components.DatePicker" binding="dp_date">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties/>
       </component>

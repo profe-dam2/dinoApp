@@ -1,5 +1,6 @@
 package org.dam.controllers;
 
+import org.dam.services.WindowsService;
 import org.dam.views.FormDialog;
 
 import java.awt.event.ActionEvent;
@@ -8,12 +9,15 @@ import java.awt.event.ActionListener;
 public class FormDialogController implements ActionListener {
     public static final String CLOSE_FORM_DIALOG ="CLOSE_FORM_DIALOG";
     private FormDialog formDialog;
+    private WindowsService windowsService;
 
-    public FormDialogController(FormDialog formDialog) {
-        this.formDialog = formDialog;
+    public FormDialogController(WindowsService windowsService) {
+        this.windowsService = windowsService;
+        this.formDialog =
+                (FormDialog) windowsService.getWindow("FormDialog");
     }
     private void handleCloseFormDialog() {
-        formDialog.dispose();
+        formDialog.closeWindow();
     }
     @Override
     public void actionPerformed(ActionEvent e) {

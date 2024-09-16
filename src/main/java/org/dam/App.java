@@ -4,7 +4,10 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import org.dam.controllers.FormDialogController;
 import org.dam.controllers.MainFrameController;
+import org.dam.services.WindowsService;
+import org.dam.views.FormDialog;
 import org.dam.views.MainFrame;
 
 /**
@@ -18,13 +21,32 @@ public class App
         //FlatDarkLaf.setup();
         //FlatDarculaLaf.setup();
         //FlatIntelliJLaf.setup();
+        // TEMA DE LA APP
         FlatLightLaf.setup();
 
+        // Servicio de ventanas
+        WindowsService windowsService = new WindowsService();
+
+        // Ventana principal
         MainFrame frame = new MainFrame();
-        MainFrameController mainFrameController = new MainFrameController(frame);
+        windowsService.registerWindow("MainFrame", frame);
+
+        // Ventana formulario
+        FormDialog formDialog = new FormDialog(frame, true);
+        windowsService.registerWindow("FormDialog", formDialog);
+
+        // Ventana consultas
+
+
+        // Controladores
+        MainFrameController mainFrameController = new MainFrameController(windowsService);
+        FormDialogController formDialogController = new FormDialogController(windowsService);
+
+        // Listeners
         frame.addListener(mainFrameController);
+        formDialog.addListener(formDialogController);
 
-
+        frame.showWindow();
 
     }
 }

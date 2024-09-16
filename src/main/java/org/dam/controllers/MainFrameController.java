@@ -1,5 +1,6 @@
 package org.dam.controllers;
 
+import org.dam.services.WindowsService;
 import org.dam.views.FormDialog;
 import org.dam.views.MainFrame;
 
@@ -13,16 +14,17 @@ public class MainFrameController implements ActionListener {
     public static final String CLOSE_MAIN_FRAME = "CLOSE_MAIN_FRAME";
 
     private MainFrame mainFrame;
-    public MainFrameController(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
+    private WindowsService windowsService;
+
+    public MainFrameController(WindowsService windowsService) {
+        this.windowsService = windowsService;
+        this.mainFrame = (MainFrame) windowsService.getWindow("MainFrame");
     }
 
     private void handleShowFormDialog() {
-        FormDialog formDialog = new FormDialog(mainFrame,true);
-        FormDialogController controller = new FormDialogController(formDialog);
-        formDialog.addListener(controller);
-        formDialog.addCommand();
-        formDialog.initWindow();
+        FormDialog formDialog =
+                (FormDialog) windowsService.getWindow("FormDialog");
+        formDialog.showWindow();
     }
 
     private void handleCloseMainFrame() {
