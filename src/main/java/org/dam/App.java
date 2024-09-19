@@ -6,6 +6,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import org.dam.controllers.FormDialogController;
 import org.dam.controllers.MainFrameController;
+import org.dam.dao.DinoDAO;
 import org.dam.services.WindowsService;
 import org.dam.views.FormDialog;
 import org.dam.views.MainFrame;
@@ -37,10 +38,14 @@ public class App
 
         // Ventana consultas
 
+        // DAOS
+        DinoDAO dinoDAO = new DinoDAO();
+
 
         // Controladores
         MainFrameController mainFrameController = new MainFrameController(windowsService);
-        FormDialogController formDialogController = new FormDialogController(windowsService);
+        FormDialogController formDialogController =
+                new FormDialogController(windowsService, dinoDAO);
 
         // Listeners
         frame.addListener(mainFrameController);

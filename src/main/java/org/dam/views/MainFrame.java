@@ -1,5 +1,7 @@
 package org.dam.views;
 
+import com.github.lgooddatepicker.components.CalendarPanel;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 

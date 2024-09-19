@@ -5,26 +5,20 @@ import java.time.LocalDate;
 public class DinoModels {
     private int id;
     private String name;
-    private String feeding;
+    private int feeding_id;
     private String attack;
     private boolean flying;
     private double weigth;
     private LocalDate date;
 
     public DinoModels() {
-        this.id = 0;
-        this.name = "";
-        this.feeding = "";
-        this.attack = "";
-        this.flying = false;
-        this.weigth = 0.0;
-        this.date = LocalDate.now();
+
     }
 
-    public DinoModels(int id, String name, String feeding, String attack, boolean flying, double weigth, LocalDate date) {
+    public DinoModels(int id, String name, int feeding_id, String attack, boolean flying, double weigth, LocalDate date) {
         this.id = id;
         this.name = name;
-        this.feeding = feeding;
+        this.feeding_id = feeding_id;
         this.attack = attack;
         this.flying = flying;
         this.weigth = weigth;
@@ -47,12 +41,12 @@ public class DinoModels {
         this.name = name;
     }
 
-    public String getFeeding() {
-        return feeding;
+    public int getFeeding_id() {
+        return feeding_id;
     }
 
-    public void setFeeding(String feeding) {
-        this.feeding = feeding;
+    public void setFeeding_id(int feeding_id) {
+        this.feeding_id = feeding_id;
     }
 
     public String getAttack() {

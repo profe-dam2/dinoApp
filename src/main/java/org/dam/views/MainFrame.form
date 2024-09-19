@@ -9,9 +9,6 @@
     <rowspec value="center:73px:noGrow"/>
     <rowspec value="top:44dlu:noGrow"/>
     <rowspec value="top:35dlu:noGrow"/>
-    <rowspec value="top:12dlu:noGrow"/>
-    <rowspec value="center:27px:noGrow"/>
-    <rowspec value="top:14dlu:noGrow"/>
     <rowspec value="center:35px:noGrow"/>
     <colspec value="fill:20px:noGrow"/>
     <colspec value="left:377dlu:noGrow"/>
