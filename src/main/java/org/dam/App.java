@@ -22,6 +22,8 @@ public class App
         //FlatDarkLaf.setup();
         //FlatDarculaLaf.setup();
         //FlatIntelliJLaf.setup();
+        // FlatDarkLaf.setup();
+
         // TEMA DE LA APP
         FlatLightLaf.setup();
 
@@ -38,6 +40,7 @@ public class App
 
         // Ventana consultas
 
+
         // DAOS
         DinoDAO dinoDAO = new DinoDAO();
 
@@ -50,7 +53,9 @@ public class App
         // Listeners
         frame.addListener(mainFrameController);
         formDialog.addListener(formDialogController);
+        formDialog.addChangeListener(formDialogController);
 
+        // MOSTRAR LA VENTANA PRINCIPAL
         frame.showWindow();
 
     }

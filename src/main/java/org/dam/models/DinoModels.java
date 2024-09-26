@@ -15,6 +15,8 @@ public class DinoModels {
 
     }
 
+
+
     public DinoModels(int id, String name, int feeding_id, String attack, boolean flying, double weigth, LocalDate date) {
         this.id = id;
         this.name = name;
@@ -80,4 +82,5 @@ public class DinoModels {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
 }

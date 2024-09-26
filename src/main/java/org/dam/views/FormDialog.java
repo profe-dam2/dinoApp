@@ -6,9 +6,11 @@ import org.dam.models.FeedingModel;
 import org.dam.utils.RoundedBorder;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.EventListener;
 
 import static org.dam.controllers.FormDialogController.CLOSE_FORM_DIALOG;
 import static org.dam.controllers.FormDialogController.CREATE_DINO;
@@ -25,6 +27,7 @@ public class FormDialog extends JDialog implements InterfaceView {
     private JLabel lb_warning;
     private DatePicker dp_date;
     private JComboBox cb_feeding;
+    private JLabel lb_weighValue;
 
     public FormDialog(JFrame parent, Boolean modal) {
         super(parent, modal);
@@ -59,6 +62,7 @@ public class FormDialog extends JDialog implements InterfaceView {
     @Override
     public void initComponents() {
         setWarningMessage("");
+        lb_weighValue.setText("Selecciona un valor");
         ArrayList<String> attacks = new ArrayList<>();
         attacks.add("Mordisco");
         attacks.add("Silver");
@@ -80,6 +84,15 @@ public class FormDialog extends JDialog implements InterfaceView {
     public void addListener(ActionListener listener) {
         btn_cancel.addActionListener(listener);
         btn_create.addActionListener(listener);
+
+    }
+
+    public void addChangeListener(ChangeListener changeListener){
+        sl_weight.addChangeListener(changeListener);
+    }
+
+    public void setWeigth(String weigth) {
+        lb_weighValue.setText(weigth+" Toneladas");
     }
 
     @Override
@@ -87,6 +100,7 @@ public class FormDialog extends JDialog implements InterfaceView {
         btn_cancel.setActionCommand(CLOSE_FORM_DIALOG);
         btn_create.setActionCommand(CREATE_DINO);
     }
+
 
     public void initWindow(){
         setContentPane(mainPanel);

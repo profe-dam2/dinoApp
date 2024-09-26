@@ -4,6 +4,7 @@ import com.github.lgooddatepicker.components.CalendarPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.EventListener;
 
 import static org.dam.controllers.MainFrameController.CLOSE_MAIN_FRAME;
 import static org.dam.controllers.MainFrameController.SHOW_FORM_DIALOG;
@@ -16,10 +17,11 @@ public class MainFrame extends JFrame implements InterfaceView {
 
     public MainFrame() {
         initWindow();
+        initComponents();
     }
 
     public void addListener(ActionListener listener) {
-        btn_create.addActionListener(listener);
+        btn_create.addActionListener( listener);
 
         btn_exit.addActionListener(listener);
     }

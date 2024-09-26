@@ -6,11 +6,13 @@ import org.dam.services.WindowsService;
 import org.dam.views.FormDialog;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class FormDialogController implements ActionListener {
+public class FormDialogController implements ActionListener, ChangeListener {
     // COMANDOS
     public static final String CLOSE_FORM_DIALOG ="CLOSE_FORM_DIALOG";
     public static final String CREATE_DINO ="CREATE_DINO";
@@ -70,5 +72,16 @@ public class FormDialogController implements ActionListener {
                     System.out.println("Unknown action command: " + command);
                     break;
         }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        JSlider source = (JSlider)e.getSource();
+        int value = source.getValue();
+        handleSetWeightValue(value);
+    }
+
+    private void handleSetWeightValue(int value) {
+        formDialog.setWeigth(String.valueOf(value));
     }
 }
