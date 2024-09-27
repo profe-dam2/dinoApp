@@ -12,8 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.EventListener;
 
-import static org.dam.controllers.FormDialogController.CLOSE_FORM_DIALOG;
-import static org.dam.controllers.FormDialogController.CREATE_DINO;
+import static org.dam.controllers.FormDialogController.*;
 
 public class FormDialog extends JDialog implements InterfaceView {
     private JPanel mainPanel;
@@ -131,8 +130,22 @@ public class FormDialog extends JDialog implements InterfaceView {
         dino.setDate(dp_date.getDate());
         return dino;
     }
+
     public void setDino(DinoModels dino){
         tx_name.setText(dino.getName());
+        dp_date.setDate(dino.getDate());
+        ck_flyer.setSelected(dino.isFlying());
+        sl_weight.setValue((int)dino.getWeigth());
+    }
+
+    public void setMode(String mode){
+        if(mode.equals(EDIT_MODE)){
+            btn_create.setText("EDITAR");
+
+        }else if(mode.equals(CREATE_MODE)){
+            btn_create.setText("CREAR");
+            btn_create.setActionCommand(CREATE_DINO);
+        }
     }
 
 }

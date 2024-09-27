@@ -17,6 +17,10 @@ public class FormDialogController implements ActionListener, ChangeListener {
     public static final String CLOSE_FORM_DIALOG ="CLOSE_FORM_DIALOG";
     public static final String CREATE_DINO ="CREATE_DINO";
 
+    // MODOS
+    public static final String EDIT_MODE ="EDIT_MODE";
+    public static final String CREATE_MODE ="CREATE_MODE";
+
     private FormDialog formDialog;
     private WindowsService windowsService;
     private DinoDAO dinoDAO;

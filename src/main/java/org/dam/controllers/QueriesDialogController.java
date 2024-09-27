@@ -3,13 +3,17 @@ package org.dam.controllers;
 import org.dam.dao.DinoDAO;
 import org.dam.models.DinoModels;
 import org.dam.services.WindowsService;
+import org.dam.views.FormDialog;
 import org.dam.views.QueriesDialog;
 
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class QueriesDialogController implements ActionListener, WindowListener, ItemListener {
+import static org.dam.controllers.FormDialogController.EDIT_MODE;
+
+public class QueriesDialogController implements ActionListener,
+        WindowListener, ItemListener, MouseListener {
 
     //public static final String
     private WindowsService windowsService;
@@ -149,5 +153,46 @@ public class QueriesDialogController implements ActionListener, WindowListener, 
     @Override
     public void itemStateChanged(ItemEvent e) {
         queriesDialog.removeFirtsComboItem();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getClickCount() == 2){
+            int dinoID = queriesDialog.getSelectedDinoID();
+            System.out.println("LA ID SELECCIONADA ES: " +dinoID);
+            try {
+                ArrayList<DinoModels> dinoList = dinoDAO.getDinoByID(dinoID);
+                DinoModels dino = dinoList.get(0);
+                FormDialog formDialog = (FormDialog) windowsService.getWindow("FormDialog");
+                formDialog.setMode(EDIT_MODE);
+                formDialog.setDino(dino);
+                formDialog.showWindow();
+
+
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

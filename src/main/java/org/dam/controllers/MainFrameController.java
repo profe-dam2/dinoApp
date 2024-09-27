@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static org.dam.controllers.FormDialogController.CREATE_MODE;
+
 public class MainFrameController implements ActionListener {
     public static final String SHOW_FORM_DIALOG = "SHOW_FORM_DIALOG";
     public static final String SHOW_QUERIES_DIALOG = "SHOW_QUERIES_DIALOG";
@@ -25,6 +27,7 @@ public class MainFrameController implements ActionListener {
     private void handleShowFormDialog() {
         FormDialog formDialog =
                 (FormDialog) windowsService.getWindow("FormDialog");
+        formDialog.setMode(CREATE_MODE);
         formDialog.showWindow();
     }
 

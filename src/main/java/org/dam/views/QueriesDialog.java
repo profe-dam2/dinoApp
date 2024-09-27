@@ -6,8 +6,10 @@ import org.dam.models.FeedingModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,6 +42,11 @@ public class QueriesDialog extends JDialog implements InterfaceView {
         super(frame, modal);
         initWindow();
         initComponents();
+    }
+
+    public int getSelectedDinoID(){
+        TableModel model = tb_dinos.getModel();
+        return Integer.valueOf(model.getValueAt(tb_dinos.getSelectedRow(), 0).toString());
     }
 
     public void loadComboFeeadings(ArrayList<FeedingModel> feedingList){
@@ -103,6 +110,7 @@ public class QueriesDialog extends JDialog implements InterfaceView {
         this.addWindowListener((WindowListener) listener);
         bt_clean.addActionListener(listener);
         cb_feeding.addItemListener((ItemListener) listener);
+        tb_dinos.addMouseListener((MouseListener) listener);
     }
 
     public LocalDate getDate1(){
