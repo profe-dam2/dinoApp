@@ -10,10 +10,12 @@ public class DinoModels {
     private boolean flying;
     private double weigth;
     private LocalDate date;
+    private String feeding;
 
     public DinoModels() {
 
     }
+
 
 
 
@@ -25,6 +27,14 @@ public class DinoModels {
         this.flying = flying;
         this.weigth = weigth;
         this.date = date;
+    }
+
+    public String getFeeding() {
+        return feeding;
+    }
+
+    public void setFeeding(String feeding) {
+        this.feeding = feeding;
     }
 
     public int getId() {
@@ -81,6 +91,18 @@ public class DinoModels {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String[] getArray(){
+        return new String[]{
+                            String.valueOf(id),
+                            name,
+                            attack,
+                            String.valueOf(flying),
+                            String.valueOf(weigth),
+                            String.valueOf(date),
+                            feeding
+        };
     }
 
 }

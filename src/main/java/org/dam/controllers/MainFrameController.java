@@ -3,6 +3,7 @@ package org.dam.controllers;
 import org.dam.services.WindowsService;
 import org.dam.views.FormDialog;
 import org.dam.views.MainFrame;
+import org.dam.views.QueriesDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class MainFrameController implements ActionListener {
     public static final String SHOW_FORM_DIALOG = "SHOW_FORM_DIALOG";
-
+    public static final String SHOW_QUERIES_DIALOG = "SHOW_QUERIES_DIALOG";
     public static final String CLOSE_MAIN_FRAME = "CLOSE_MAIN_FRAME";
 
     private MainFrame mainFrame;
@@ -41,6 +42,11 @@ public class MainFrameController implements ActionListener {
 
     }
 
+    private void handleShowQueriesDialog() {
+        QueriesDialog queriesDialog = (QueriesDialog) windowsService.getWindow("QueriesDialog");
+        queriesDialog.showWindow();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -51,7 +57,9 @@ public class MainFrameController implements ActionListener {
             case CLOSE_MAIN_FRAME:
                 handleCloseMainFrame();
                 break;
-
+            case SHOW_QUERIES_DIALOG:
+                handleShowQueriesDialog();
+                break;
                 default:
                     System.out.println("Unknown action command: " + command);
                     break;

@@ -6,8 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.EventListener;
 
-import static org.dam.controllers.MainFrameController.CLOSE_MAIN_FRAME;
-import static org.dam.controllers.MainFrameController.SHOW_FORM_DIALOG;
+import static org.dam.controllers.MainFrameController.*;
 
 public class MainFrame extends JFrame implements InterfaceView {
     private JPanel mainPanel;
@@ -21,8 +20,8 @@ public class MainFrame extends JFrame implements InterfaceView {
     }
 
     public void addListener(ActionListener listener) {
-        btn_create.addActionListener( listener);
-
+        btn_create.addActionListener(listener);
+        btn_queries.addActionListener(listener);
         btn_exit.addActionListener(listener);
     }
 
@@ -33,7 +32,7 @@ public class MainFrame extends JFrame implements InterfaceView {
 
     public void setCommands(){
         btn_create.setActionCommand(SHOW_FORM_DIALOG);
-
+        btn_queries.setActionCommand(SHOW_QUERIES_DIALOG);
         btn_exit.setActionCommand(CLOSE_MAIN_FRAME);
     }
 

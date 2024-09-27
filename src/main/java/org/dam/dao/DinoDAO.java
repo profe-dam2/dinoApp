@@ -6,6 +6,7 @@ import org.dam.models.FeedingModel;
 import org.postgresql.util.PSQLException;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DinoDAO {
@@ -89,5 +90,159 @@ public class DinoDAO {
             closeDBConnection();
         }
     }
+
+    public ArrayList<DinoModels> getDinos() throws SQLException {
+         ArrayList<DinoModels> dinoList = new ArrayList<>();
+         if(!initDBConnection()){
+             throw new SQLException("Error al conectar con la base de datos");
+         }
+
+         try {
+             String query = "SELECT d.id, d.nombre, d.peso, d.fecha, d.ataque, d.volador, a.alimentacion\n" +
+                            "FROM dinosaurios d\n" +
+                            "INNER JOIN alimentacion a\n" +
+                            "ON d.alimentacion_id = a.id;";
+
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery();
+             while(resultSet.next()){
+                 DinoModels dinoModels = new DinoModels();
+                 dinoModels.setId(resultSet.getInt("id"));
+                 dinoModels.setName(resultSet.getString("nombre"));
+                 dinoModels.setFlying(resultSet.getBoolean("volador"));
+                 dinoModels.setWeigth(resultSet.getInt("peso"));
+                 dinoModels.setAttack(resultSet.getString("ataque"));
+                 dinoModels.setDate(resultSet.getDate("fecha").toLocalDate());
+                 dinoModels.setFeeding(resultSet.getString("alimentacion"));
+                 dinoList.add(dinoModels);
+             }
+         }catch (Exception e){
+             System.err.println(e.getMessage());
+             throw new SQLException("Error al consultar los dinos");
+         }finally {
+             closeDBConnection();
+         }
+
+         return dinoList;
+
+    }
+
+    public ArrayList<DinoModels> getDinoByID(int id) throws SQLException {
+        ArrayList<DinoModels> dinoList = new ArrayList<>();
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        try {
+            String query = "SELECT d.id, d.nombre, d.peso, d.fecha, d.ataque, d.volador, a.alimentacion\n" +
+                    "FROM dinosaurios d\n" +
+                    "INNER JOIN alimentacion a\n" +
+                    "ON d.alimentacion_id = a.id\n" +
+                    "WHERE d.id = ?;";
+           // String query = "SELECT * FROM dinosaurios WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                DinoModels dinoModels = new DinoModels();
+                dinoModels.setId(resultSet.getInt("id"));
+                dinoModels.setName(resultSet.getString("nombre"));
+                dinoModels.setFlying(resultSet.getBoolean("volador"));
+                dinoModels.setWeigth(resultSet.getInt("peso"));
+                dinoModels.setAttack(resultSet.getString("ataque"));
+                dinoModels.setDate(resultSet.getDate("fecha").toLocalDate());
+                dinoModels.setFeeding(resultSet.getString("alimentacion"));
+                dinoList.add(dinoModels);
+            }
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            throw new SQLException("Error al consultar los dinos");
+        }finally {
+            closeDBConnection();
+        }
+
+        return dinoList;
+
+    }
+
+    public ArrayList<DinoModels> getDinoByNameAndFly(String name, boolean fly) throws SQLException {
+        ArrayList<DinoModels> dinoList = new ArrayList<>();
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        try {
+            String query = "SELECT d.id, d.nombre, d.peso, d.fecha, d.ataque, d.volador, a.alimentacion\n" +
+                           "FROM dinosaurios d\n" +
+                           "INNER JOIN alimentacion a\n" +
+                           "ON d.alimentacion_id = a.id\n" +
+                           "WHERE LOWER(nombre) LIKE LOWER(?) AND volador = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%"+name+"%");
+            preparedStatement.setBoolean(2, fly);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                DinoModels dinoModels = new DinoModels();
+                dinoModels.setId(resultSet.getInt("id"));
+                dinoModels.setName(resultSet.getString("nombre"));
+                dinoModels.setFlying(resultSet.getBoolean("volador"));
+                dinoModels.setWeigth(resultSet.getInt("peso"));
+                dinoModels.setAttack(resultSet.getString("ataque"));
+                dinoModels.setDate(resultSet.getDate("fecha").toLocalDate());
+                dinoModels.setFeeding(resultSet.getString("alimentacion"));
+                dinoList.add(dinoModels);
+            }
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            throw new SQLException("Error al consultar los dinos");
+        }finally {
+            closeDBConnection();
+        }
+
+        return dinoList;
+
+    }
+
+    public ArrayList<DinoModels> getDinoByDates(LocalDate date1,
+                                                LocalDate date2) throws SQLException {
+        ArrayList<DinoModels> dinoList = new ArrayList<>();
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+
+        try {
+            String query = "SELECT d.id, d.nombre, d.peso, d.fecha, d.ataque, d.volador, a.alimentacion\n" +
+                           "FROM dinosaurios d\n" +
+                           "INNER JOIN alimentacion a\n" +
+                           "ON d.alimentacion_id = a.id\n" +
+                           "WHERE fecha BETWEEN ? AND ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDate(1, Date.valueOf(date1));
+            preparedStatement.setDate(2, Date.valueOf(date2));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                DinoModels dinoModels = new DinoModels();
+                dinoModels.setId(resultSet.getInt("id"));
+                dinoModels.setName(resultSet.getString("nombre"));
+                dinoModels.setFlying(resultSet.getBoolean("volador"));
+                dinoModels.setWeigth(resultSet.getInt("peso"));
+                dinoModels.setAttack(resultSet.getString("ataque"));
+                dinoModels.setDate(resultSet.getDate("fecha").toLocalDate());
+                dinoModels.setFeeding(resultSet.getString("alimentacion"));
+                dinoList.add(dinoModels);
+            }
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            throw new SQLException("Error al consultar los dinos");
+        }finally {
+            closeDBConnection();
+        }
+
+        return dinoList;
+
+    }
+
 
 }
