@@ -306,7 +306,7 @@
           <text value="BUSCAR"/>
         </properties>
       </component>
-      <component id="22007" class="javax.swing.JButton" binding="button1" default-binding="true">
+      <component id="22007" class="javax.swing.JButton" binding="bt_back">
         <constraints>
           <grid row="13" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="0" right="0" defaultalign-vert="false"/>
@@ -315,7 +315,7 @@
           <text value="&lt;&lt;"/>
         </properties>
       </component>
-      <component id="25539" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="25539" class="javax.swing.JButton" binding="bt_next">
         <constraints>
           <grid row="13" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="0" right="0" defaultalign-vert="false"/>
@@ -324,7 +324,7 @@
           <text value="&gt;&gt;"/>
         </properties>
       </component>
-      <component id="9dd8" class="javax.swing.JLabel">
+      <component id="9dd8" class="javax.swing.JLabel" binding="lb_pages">
         <constraints>
           <grid row="13" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="0" right="0" defaultalign-vert="false"/>
@@ -333,7 +333,7 @@
           <text value="Página ........."/>
         </properties>
       </component>
-      <component id="51c58" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+      <component id="51c58" class="javax.swing.JComboBox" binding="cb_results">
         <constraints>
           <grid row="13" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>

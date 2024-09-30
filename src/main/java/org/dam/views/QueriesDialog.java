@@ -29,19 +29,63 @@ public class QueriesDialog extends JDialog implements InterfaceView {
     private DatePicker dp_date2;
     private JComboBox cb_feeding;
     private JButton BUSCARButton;
-    private JButton button1;
-    private JButton button2;
-    private JComboBox comboBox1;
+    private JButton bt_back;
+    private JButton bt_next;
+    private JComboBox cb_results;
     private JButton bt_clean;
+    private JLabel lb_pages;
     private boolean isFeedingSelected = false;
     private ArrayList<FeedingModel> feedingList;
     private ActionListener listener;
+    private int totalPages;
+    private int page;
+    private int totalElements;
 
 
     public QueriesDialog(JFrame frame, boolean modal) {
         super(frame, modal);
         initWindow();
         initComponents();
+    }
+
+    public void setTotalElements(int totalElements) {
+       this.totalElements = totalElements;
+    }
+
+    public int getTotalElements(){
+        return totalElements;
+    }
+
+
+    public void setTotalPages(int value) {
+
+        totalPages = (int)Math.ceil((double) getTotalElements() /
+                getSelectedResults());
+        if(value == 0){
+            page = 1;
+        }
+        else if((value + page) <= totalPages && value + page >0){
+            page = value + page;
+
+
+        }
+        lb_pages.setText("Página " + page + " de " + totalPages);
+
+    }
+
+
+
+    public void loadComboResults(){
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for(int i = 10; i <= 50 ; i+=10){
+            model.addElement(i);
+        }
+        cb_results.setModel(model);
+        cb_results.setSelectedIndex(0);
+    }
+
+    public int getSelectedResults(){
+        return (int) cb_results.getSelectedItem();
     }
 
     public int getSelectedDinoID(){
@@ -111,6 +155,9 @@ public class QueriesDialog extends JDialog implements InterfaceView {
         bt_clean.addActionListener(listener);
         cb_feeding.addItemListener((ItemListener) listener);
         tb_dinos.addMouseListener((MouseListener) listener);
+        cb_results.addItemListener((ItemListener) listener);
+        bt_back.addActionListener(listener);
+        bt_next.addActionListener(listener);
     }
 
     public LocalDate getDate1(){

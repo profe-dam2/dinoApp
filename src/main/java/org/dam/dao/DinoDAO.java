@@ -91,7 +91,7 @@ public class DinoDAO {
         }
     }
 
-    public ArrayList<DinoModels> getDinos() throws SQLException {
+    public ArrayList<DinoModels> getDinos(int limit, int offset) throws SQLException {
          ArrayList<DinoModels> dinoList = new ArrayList<>();
          if(!initDBConnection()){
              throw new SQLException("Error al conectar con la base de datos");
@@ -101,10 +101,14 @@ public class DinoDAO {
              String query = "SELECT d.id, d.nombre, d.peso, d.fecha, d.ataque, d.volador, a.alimentacion\n" +
                             "FROM dinosaurios d\n" +
                             "INNER JOIN alimentacion a\n" +
-                            "ON d.alimentacion_id = a.id;";
+                            "ON d.alimentacion_id = a.id\n" +
+                            "LIMIT ? OFFSET ?;";
 
              PreparedStatement preparedStatement = connection.prepareStatement(query);
+             preparedStatement.setInt(1, limit);
+             preparedStatement.setInt(2, offset);
              ResultSet resultSet = preparedStatement.executeQuery();
+
              while(resultSet.next()){
                  DinoModels dinoModels = new DinoModels();
                  dinoModels.setId(resultSet.getInt("id"));
@@ -242,6 +246,26 @@ public class DinoDAO {
 
         return dinoList;
 
+    }
+
+    public int getTotalElements() throws SQLException {
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar con la base de datos");
+        }
+        try{
+            String query = "SELECT COUNT(*) AS total FROM dinosaurios;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                return resultSet.getInt("total");
+            }
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            throw new SQLException("Error al consultar los dinos");
+        }finally {
+            closeDBConnection();
+        }
+        return 0;
     }
 
 

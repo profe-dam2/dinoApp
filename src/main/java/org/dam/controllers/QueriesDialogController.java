@@ -70,9 +70,13 @@ public class QueriesDialogController implements ActionListener,
         }
     }
 
+    private void handleLoadComboResults(){
+        queriesDialog.loadComboResults();
+    }
 
     @Override
     public void windowOpened(WindowEvent e) {
+
     }
 
     @Override
@@ -95,9 +99,9 @@ public class QueriesDialogController implements ActionListener,
 
     }
 
-    private void handleShowDinos(){
+    private void handleShowDinos(int limit, int offset){
         try {
-            ArrayList<DinoModels> dinoList = dinoDAO.getDinos();
+            ArrayList<DinoModels> dinoList = dinoDAO.getDinos(limit, offset);
             queriesDialog.loadDinoTable(dinoList);
 
         } catch (SQLException e) {
@@ -138,11 +142,27 @@ public class QueriesDialogController implements ActionListener,
         }
     }
 
+    private void getTotalElements(){
+        try {
+            int totalElements = dinoDAO.getTotalElements();
+            queriesDialog.setTotalElements(totalElements);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setTotalPages(){
+
+    }
+
     @Override
     public void windowActivated(WindowEvent e) {
-        handleShowDinos();
+        handleLoadComboResults();
         handleGetFeedingList();
         queriesDialog.initComponents();
+        getTotalElements();
+        handleShowDinos(queriesDialog.getSelectedResults(),0);
+        queriesDialog.setTotalPages(0);
     }
 
     @Override
@@ -152,6 +172,11 @@ public class QueriesDialogController implements ActionListener,
 
     @Override
     public void itemStateChanged(ItemEvent e) {
+        if(e.getStateChange() == ItemEvent.SELECTED){
+            queriesDialog.setTotalPages(0);
+            handleShowDinos(queriesDialog.getSelectedResults(),0);
+        }
+
         queriesDialog.removeFirtsComboItem();
     }
 
